@@ -9,8 +9,6 @@
 
 A robust, full-stack URL shortening service designed for high performance, scalability, and ease of deployment. This project demonstrates a microservices-ready architecture using **Spring Boot**, containerized with **Docker**, and utilizes a **Hybrid Database** approach (SQL + NoSQL) alongside **Read-Aside Caching** for optimal performance.
 
----
-
 ## 🏗 System Architecture
 
 The system is designed to handle high read traffic (redirections) vs. write traffic (shortening) efficiently.
@@ -58,3 +56,4 @@ Service will be available at: http://localhost:8080.
 * **SQL:** PostgreSQL (User management).
 * **Cache:** Redis (Read-Aside strategy).
 * **DevOps:** Docker & Docker Compose.
+
