@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: tinyurl-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+      - mongodb
+      - redis
+    environment:
+      # Pass hostnames to the application. Defaults are handled in application.properties.
+      MONGO_HOST: tinyurl-mongo
+      DB_HOST: tinyurl-postgres
+      REDIS_HOST: tinyurl-redis
+
+  postgres-db:
+    image: postgres:15
+    container_name: tinyurl-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tinyurl_users
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:latest
+    container_name: tinyurl-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data_final:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: tinyurl-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
+  mongo_data_final:
